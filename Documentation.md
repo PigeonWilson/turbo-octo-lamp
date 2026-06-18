@@ -10,6 +10,7 @@ service backend php:
 - module debug
 - module pour les tests
 - module api
+- module sauvegarde
 
 ## mise en place de l'environnement
 ### service backend php
