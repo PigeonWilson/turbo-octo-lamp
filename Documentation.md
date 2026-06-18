@@ -1,14 +1,14 @@
 # Documentation
 
 ### composants
-- service backend php: 
--- module pour la base de données
--- module pour le contrôle des accès et de l'identité
--- module pour la publication de contenu 
--- module courriel
--- module communication interne
--- module debug
--- module pour les tests
+service backend php: 
+- module pour la base de données
+- module pour le contrôle des accès et de l'identité
+- module pour la publication de contenu 
+- module courriel
+- module communication interne
+- module debug
+- module pour les tests
 
 ## mise en place de l'environnement
 ### service backend php
