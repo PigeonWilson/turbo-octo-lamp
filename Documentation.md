@@ -9,6 +9,7 @@ service backend php:
 - module communication interne
 - module debug
 - module pour les tests
+- module api
 
 ## mise en place de l'environnement
 ### service backend php
@@ -27,3 +28,4 @@ service backend php:
 - exécuter la signature du site pour compléter l'installation
 - déactiver le mode maintenance
 - tester le site
+
