@@ -11,6 +11,7 @@ service backend php:
 - module pour les tests
 - module api
 - module sauvegarde
+- module cron job
 
 ## mise en place de l'environnement
 ### service backend php
