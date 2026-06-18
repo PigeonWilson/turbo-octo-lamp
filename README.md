@@ -1,4 +1,5 @@
 # turbo-octo-lamp
+manifeste
 Le but de cette page est d'expliquer le fonctionnement et les critères d'inclusion ou de refus des contributions à ce wiki. Vous pouvez consulter le manifeste pour connaître nos valeurs, la page des objectifs pour notre vision à moyen et long terme pour ce projet ou les règlements pour les critères de modération et les règles de bonne conduite attendues des contributeurs. 
 
 
