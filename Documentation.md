@@ -20,6 +20,7 @@ service backend php:
 - télécharger le manifeste pour la mise à jour du data
 - modifier le manifeste pour les fallback*
 - générer le site basé sur le manifeste
+- générer un identité numérique localement
 - configuration du compte application
 - configuration pour le module courriel (optionnel)
 - configuration des comptes
