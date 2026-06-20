@@ -1,1 +1,8 @@
 AGENT.md
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Ruff
+.ruff_cache/
