@@ -1,3 +1,4 @@
+import argparse
 import json
 from pathlib import Path
 
@@ -11,9 +12,19 @@ def load_json_file(json_file_path):
     return data
 
 
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Load and validate JSON site data.")
+
+    parser.add_argument(
+        "-f", "--file", type=Path, required=True, help="Path to the JSON data file."
+    )
+
+    return parser.parse_args()
+
+
 def main() -> int:
-    script_directory = Path(__file__).parent
-    json_file_path = script_directory / "example.json"
+    args = parse_args()
+    json_file_path = args.file
 
     if not json_file_path.exists():
         print("JSON file not found:", json_file_path)
