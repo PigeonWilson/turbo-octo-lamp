@@ -19,6 +19,8 @@ Le script php utilise le verbe $_REQUEST. Tous les verbes http sont supportés
 - d ou delete
 
 ## Exemple
+Si le username est 'test' et le token est 'test'
+
 Exemple: /?username=[username]&token=[token]&cmd=db&arg=create&[parametres optionnels qui dependent de la table]
 ou http://localhost/turbo-octo-lamp/.github/backendPhp/v2/?cmd=db&arg=c&username=test&token=test&table=storage&uniqueid=star123&data=fist%20entry
 
