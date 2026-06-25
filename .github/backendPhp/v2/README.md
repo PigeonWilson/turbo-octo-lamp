@@ -1,6 +1,9 @@
 # Documentation
 La phase 1 implémente un accès CRUD via un script php pour une base de données mySQL. 
 
+# informations base de donnees
+https://github.com/PigeonWilson/turbo-octo-lamp/blob/main/.github/backendPhp/v2/loader.php
+
 # Verbes http
 Le script php utilise le verbe $_REQUEST. Tous les verbes http sont supportés
 
@@ -24,6 +27,8 @@ Si le username est 'test' et le token est 'test'
 Exemple: /?username=[username]&token=[token]&cmd=db&arg=create&[parametres optionnels qui dependent de la table]
 ou http://localhost/turbo-octo-lamp/.github/backendPhp/v2/?cmd=db&arg=c&username=test&token=test&table=storage&uniqueid=star123&data=fist%20entry
 
+### Explication 
+le premier item donne le resultat de l'operation tandis que le deuxieme donne le id de la derniere entree. 
 retournerait: 
 {
     "operationResult": true,
