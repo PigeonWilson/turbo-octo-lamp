@@ -77,24 +77,23 @@ if (mb_strtolower($command) === 'db')
 
     if (mb_strtolower($argument) === 'create' || mb_strtolower($argument) === 'c')
     {
-        var_dump($table);
         $result['operationResult'] = $GLOBALS['framework']->db->Create($table, $data);
         $result['lastInsertedId'] = $GLOBALS['framework']->db->LastInsertedId();
     }
 
     if (mb_strtolower($argument) === 'read' || mb_strtolower($argument) === 'r')
     {
-        $result['operationResult'] = $GLOBALS['framework']->Db->CustomWhereClause($table, 'id', $data['id']);
+        $result['operationResult'] = $GLOBALS['framework']->db->Read($table, $data['id']);
     }
 
     if (mb_strtolower($argument) === 'update' || mb_strtolower($argument) === 'u')
     {
-        $result['operationResult'] = $GLOBALS['framework']->Db->Update($table, $data['id'], $data);
+        $result['operationResult'] = $GLOBALS['framework']->db->Update($table, $data['id'], $data);
     }
 
     if (mb_strtolower($argument) === 'delete' || mb_strtolower($argument) === 'd')
     {
-        $result['operationResult'] = $GLOBALS['framework']->Db->Delete($table, $data['id']);
+        $result['operationResult'] = $GLOBALS['framework']->db->Delete($table, $data['id']);
     }
 
     header('Content-Type: application/json');
