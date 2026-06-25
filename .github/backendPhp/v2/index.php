@@ -97,5 +97,7 @@ if (mb_strtolower($command) === 'db')
         $result['operationResult'] = $GLOBALS['framework']->Db->Delete($table, $data['id']);
     }
 
+    header('Content-Type: application/json');
     echo json_encode($result, JSON_PRETTY_PRINT);
+    die();
 }
