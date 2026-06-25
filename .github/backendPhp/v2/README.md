@@ -7,6 +7,9 @@ https://github.com/PigeonWilson/turbo-octo-lamp/blob/main/.github/backendPhp/v2/
 # Verbes http
 Le script php utilise le verbe $_REQUEST. Tous les verbes http sont supportés
 
+# Parametres toujours requis
+- cmd (utilisé pour specifier le module)
+
 # Modules toujours requis
 - db (utilisé pour login)
 ## Parametres requis pour db
