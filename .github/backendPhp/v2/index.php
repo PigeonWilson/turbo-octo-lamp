@@ -77,7 +77,6 @@ if (mb_strtolower($command) === 'db')
 
     if (mb_strtolower($argument) === 'create' || mb_strtolower($argument) === 'c')
     {
-        var_dump($table);
         $result['operationResult'] = $GLOBALS['framework']->db->Create($table, $data);
         $result['lastInsertedId'] = $GLOBALS['framework']->db->LastInsertedId();
     }
