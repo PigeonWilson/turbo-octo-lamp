@@ -9,6 +9,8 @@ Le script php utilise le verbe $_REQUEST. Tous les verbes http sont supportés
 
 # Parametres toujours requis
 - cmd (utilisé pour specifier le module)
+- username (utilisé pour login)
+- token (utilisé pour login)
 
 # Modules toujours requis
 - db (utilisé pour login)
@@ -39,10 +41,5 @@ retournerait:
     "operationResult": true,
     "lastInsertedId": "10"
 }
-
-
-# Paramètres toujours requis
-- username (utilisé pour login)
-- token (utilisé pour login)
 
 # Modules optionnels
