@@ -1,73 +1,116 @@
 <?php
 require_once 'loader.php';
-#
-# Phase 1
-#
-#
-const COMMAND_CMD = 'cmd';
-const COMMAND_ARG = 'arg';
-const COMMAND_USERNAME = 'username';
-const COMMAND_TOKEN = 'token';
-const COMMAND_TABLE = 'table';
-const COMMANDS = [COMMAND_CMD, COMMAND_ARG, COMMAND_USERNAME, COMMAND_TOKEN, COMMAND_TABLE];
-const TABLES_EXCLUSION_LIST =
-[
-    'authentication',
-    'authorization_role',
-    'module',
-    'modulemethod',
-    'role',
-    'role_group_tasks',
-    'session',
-    'task'
-];
 
-# arguments
-$verbs = [HTTP_METHOD_GET, HTTP_METHOD_POST];
-$command = $GLOBALS['framework']->network_request[COMMAND_CMD];
-$argument = $GLOBALS['framework']->network_request[COMMAND_ARG];
-$username = $GLOBALS['framework']->network_request[COMMAND_USERNAME];
-$token = $GLOBALS['framework']->network_request[COMMAND_TOKEN];
+/*
+ * This is the backend of the application, it receives requests from the frontend.
+ * This requires authentication.
+ * Phase 1
+ * Version change:
+ * -> Version 0.1.0: Phase 1
+ * -> Version 0.1.1: Code refactoring to reduce hard-coded value
+ * -> Version 0.1.2: Added separated authentication module and relaxed usage
+ * */
 
-function PrintIfDebug($message)
+/*
+ * Authentication module gives a session token to the user.
+ * This token is used to authenticate the user for all subsequent requests.
+ * */
+if ($GLOBALS[Framework::COMMAND_CMD] === Framework::MODULE_AUTH)
 {
-    if (DEBUG_MODE_CONST)
+    if (is_null($GLOBALS[Framework::COMMAND_USERNAME])
+        || is_null($GLOBALS[Framework::COMMAND_TOKEN]))
     {
-        $GLOBALS['framework']->Echo($message);
+        die();
     }
-}
 
-if (is_null($command)
-    || is_null($argument)
-    || is_null($username)
-    || is_null($token)
-)
-{
+    $sessionToken = $GLOBALS[Framework::FRAMEWORK_IDENTIFIER]->Login2($GLOBALS[Framework::COMMAND_USERNAME], $GLOBALS[Framework::COMMAND_TOKEN]);
+    if (is_null($sessionToken))
+    {
+        die();
+    }
+
+    $GLOBALS[Framework::FRAMEWORK_IDENTIFIER]::EchoJson(Framework::SESSION_TOKEN, $sessionToken);
     die();
 }
 
-# authentication
-$authenticated = $GLOBALS['framework']->Login($username, $token);
-if ($authenticated === false) die();
+if ($GLOBALS[Framework::COMMAND_CMD] === Framework::MODULE_WHOAMI)
+{
+    $sessionToken
+        = $GLOBALS[Framework::FRAMEWORK_IDENTIFIER]->network_request[Framework::SESSION_TOKEN];
+    if (!is_null($sessionToken))
+    {
+        $whoAmI = $GLOBALS[Framework::FRAMEWORK_IDENTIFIER]->WhoAmI($sessionToken);
+        $whoAmI->token = null;
+        if (!is_null($whoAmI))
+        {
+            $GLOBALS[Framework::FRAMEWORK_IDENTIFIER]::EchoJson(Framework::MODULE_WHOAMI, $whoAmI);
+            die();
+        }
+    }
+}
+
+# if there is no session token and the cmd is not auth, then the user is not logged in
+$sessionToken = $GLOBALS[Framework::FRAMEWORK_IDENTIFIER]->network_request[Framework::SESSION_TOKEN];
+if (!is_null($sessionToken))
+{
+    $user = $GLOBALS[Framework::FRAMEWORK_IDENTIFIER]->WhoAmI($sessionToken);
+    if (!is_null($user))
+    {
+        $isUserLoggedIn = $GLOBALS[Framework::FRAMEWORK_IDENTIFIER]->IsUserLoggedIn($user->id);
+        if (!$isUserLoggedIn)
+        {
+            die();
+        }
+    }
+}
+
+# if a command is given, then the user must be logged in
+# except for commands in the whitelist
+if (!is_null($GLOBALS[Framework::COMMAND_CMD]))
+{
+    $whiteList = [Framework::MODULE_AUTH, Framework::MODULE_PACKAGE];
+
+    if (!in_array($GLOBALS[Framework::COMMAND_CMD], $whiteList) && is_null($sessionToken))
+    {
+        die();
+    }
+}
+
+/*
+ * publication module
+ * This module is for retrieving packages. It doesn't require authentication.
+ * */
+if ($GLOBALS[Framework::COMMAND_CMD] === Framework::MODULE_PACKAGE)
+{
+    try
+    {
+        $packageId = $GLOBALS[Framework::FRAMEWORK_IDENTIFIER]->network_request[Framework::PACKAGE_ID];
+        $package = $GLOBALS[Framework::FRAMEWORK_IDENTIFIER]->CustomWhereClause('package', 'id', $packageId)[0];
+        $GLOBALS[Framework::FRAMEWORK_IDENTIFIER]::EchoJson(Framework::MODULE_PACKAGE, $package);
+        die();
+    }catch (Exception $e)
+    {
+        die();
+    }
+}
 
 # database module
-const DATABASE_ALLOWED_TABLES = ['storage'];
-if (mb_strtolower($command) === 'db')
+if ($GLOBALS[Framework::COMMAND_CMD] === Framework::MODULE_DB)
 {
     # domain-specific argument
-    $table = $GLOBALS['framework']->network_request[COMMAND_TABLE];
+    $table = $GLOBALS[Framework::FRAMEWORK_IDENTIFIER]->network_request[Framework::COMMAND_TABLE];
 
     # enforce table exclusion
-    if (is_null($table) || in_array($table, TABLES_EXCLUSION_LIST))
+    if (is_null($table) || in_array($table, Framework::TABLES_EXCLUSION_LIST))
     {
         die();
     }
 
     # filter out the command and table
     $data = [];
-    foreach ($GLOBALS['framework']->network_request as $key => $value)
+    foreach ($GLOBALS[Framework::FRAMEWORK_IDENTIFIER]->network_request as $key => $value)
     {
-        if (!in_array($key, COMMANDS))
+        if (!in_array($key, Framework::GetCommands()))
         {
             $data[$key] = $value;
         }
@@ -75,28 +118,32 @@ if (mb_strtolower($command) === 'db')
 
     $result = null;
 
-    if (mb_strtolower($argument) === 'create' || mb_strtolower($argument) === 'c')
+    if ($GLOBALS[Framework::COMMAND_ARG] === 'create' || $GLOBALS[Framework::COMMAND_ARG] === 'c')
     {
-        $result['operationResult'] = $GLOBALS['framework']->db->Create($table, $data);
-        $result['lastInsertedId'] = $GLOBALS['framework']->db->LastInsertedId();
+        $result['operationResult']
+            = $GLOBALS[Framework::FRAMEWORK_IDENTIFIER]->db->Create($table, $data);
+        $result['lastInsertedId']
+            = $GLOBALS[Framework::FRAMEWORK_IDENTIFIER]->db->LastInsertedId();
     }
 
-    if (mb_strtolower($argument) === 'read' || mb_strtolower($argument) === 'r')
+    if ($GLOBALS[Framework::COMMAND_ARG] === 'read' || $GLOBALS[Framework::COMMAND_ARG] === 'r')
     {
-        $result['operationResult'] = $GLOBALS['framework']->db->Read($table, $data['id']);
+        $result['operationResult']
+            = $GLOBALS[Framework::FRAMEWORK_IDENTIFIER]->db->Read($table, $data['id']);
     }
 
-    if (mb_strtolower($argument) === 'update' || mb_strtolower($argument) === 'u')
+    if ($GLOBALS[Framework::COMMAND_ARG] === 'update' || $GLOBALS[Framework::COMMAND_ARG] === 'u')
     {
-        $result['operationResult'] = $GLOBALS['framework']->db->Update($table, $data['id'], $data);
+        $result['operationResult']
+            = $GLOBALS[Framework::FRAMEWORK_IDENTIFIER]->db->Update($table, $data['id'], $data);
     }
 
-    if (mb_strtolower($argument) === 'delete' || mb_strtolower($argument) === 'd')
+    if ($GLOBALS[Framework::COMMAND_ARG] === 'delete' || $GLOBALS[Framework::COMMAND_ARG] === 'd')
     {
-        $result['operationResult'] = $GLOBALS['framework']->db->Delete($table, $data['id']);
+        $result['operationResult']
+            = $GLOBALS[Framework::FRAMEWORK_IDENTIFIER]->db->Delete($table, $data['id']);
     }
 
-    header('Content-Type: application/json');
-    echo json_encode($result, JSON_PRETTY_PRINT);
+    $GLOBALS[Framework::FRAMEWORK_IDENTIFIER]::EchoJson(Framework::MODULE_DB, $result);
     die();
 }
