@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 25, 2026 at 08:21 PM
+-- Generation Time: Jul 02, 2026 at 06:45 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -67,14 +67,6 @@ CREATE TABLE `module` (
   `referenceName` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `module`
---
-
-INSERT INTO `module` (`id`, `name`, `description`, `referenceName`) VALUES
-(5, 'database', 'access to the database', 'db'),
-(6, 'authentication', '', 'auth');
-
 -- --------------------------------------------------------
 
 --
@@ -88,15 +80,19 @@ CREATE TABLE `modulemethod` (
   `description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `modulemethod`
+-- Table structure for table `package`
 --
 
-INSERT INTO `modulemethod` (`id`, `moduleId`, `referenceName`, `description`) VALUES
-(1, 5, 'c', 'create'),
-(2, 5, 'r', 'read'),
-(3, 5, 'u', 'update'),
-(4, 5, 'd', 'delete');
+CREATE TABLE `package` (
+  `id` int(11) NOT NULL,
+  `data` longtext NOT NULL,
+  `data2` longblob DEFAULT NULL,
+  `description` text NOT NULL,
+  `isActive` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -106,7 +102,8 @@ INSERT INTO `modulemethod` (`id`, `moduleId`, `referenceName`, `description`) VA
 
 CREATE TABLE `role` (
   `id` int(11) NOT NULL,
-  `name` text NOT NULL
+  `name` text NOT NULL,
+  `description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -134,6 +131,13 @@ CREATE TABLE `session` (
   `token` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `session`
+--
+
+INSERT INTO `session` (`id`, `authenticationId`, `token`) VALUES
+(35, 1, 'R7O6n57eGdNwKsddIeAlcS6Bn3S54FYeMGTG12cZ79y7ZQTHOk63HnLe7iluDLTxMNS0d2oGHvK4D1cbi2DbQDEhuNf5VghSj7nDttJROn0pw0SAWMlIVmvTp4IOfQAe6H7R056UvNcDYbpx093D1EGrLo1AYof4HbKEpqRO5IOFHfPcfYB8FVPkJGjwJleYZR2IbJrjy0F0olBFaRZJupsxCLTeo9b2Pq9ZwVtK53D7PVkhc2de2uNDZPeN66TZ');
+
 -- --------------------------------------------------------
 
 --
@@ -143,9 +147,35 @@ CREATE TABLE `session` (
 CREATE TABLE `storage` (
   `id` int(11) NOT NULL,
   `stamp` timestamp NOT NULL DEFAULT current_timestamp(),
-  `uniqueId` text NOT NULL,
-  `data` longtext NOT NULL
+  `data` longtext NOT NULL,
+  `data2` longblob DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `system_table`
+--
+
+CREATE TABLE `system_table` (
+  `id` int(11) NOT NULL,
+  `name` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `system_table`
+--
+
+INSERT INTO `system_table` (`id`, `name`) VALUES
+(1, 'authentication'),
+(2, 'authorization_role'),
+(3, 'module'),
+(4, 'modulemethod'),
+(5, 'package'),
+(6, 'role'),
+(7, 'role_group_tasks'),
+(8, 'session'),
+(9, 'task');
 
 -- --------------------------------------------------------
 
@@ -188,6 +218,12 @@ ALTER TABLE `modulemethod`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `package`
+--
+ALTER TABLE `package`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `role`
 --
 ALTER TABLE `role`
@@ -209,6 +245,12 @@ ALTER TABLE `session`
 -- Indexes for table `storage`
 --
 ALTER TABLE `storage`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `system_table`
+--
+ALTER TABLE `system_table`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -246,6 +288,12 @@ ALTER TABLE `modulemethod`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `package`
+--
+ALTER TABLE `package`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `role`
 --
 ALTER TABLE `role`
@@ -261,13 +309,19 @@ ALTER TABLE `role_group_tasks`
 -- AUTO_INCREMENT for table `session`
 --
 ALTER TABLE `session`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `storage`
 --
 ALTER TABLE `storage`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `system_table`
+--
+ALTER TABLE `system_table`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `task`
