@@ -1,229 +1,53 @@
 <?php
 require_once 'loader.php';
+session_start();
+?>
+<!DOCTYPE html>
+<html lang="<?php echo web_lang; ?>">
+<head>
+    <meta http-equiv="cache-control" content="max-age=0" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Bonjour</title>
+    <link rel="stylesheet" href="css/style.css">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+</head>
+<body>
 
-// list available modules
-function GetModules() : array
-{
-    $regular = [
-        api_module_db,
-        api_module_whoami,
-        api_module_packaging
-    ];
-    return array_merge($regular, GetModulesAnonymous());
-}
+<?php require_once 'header_public.php'; ?>
 
-// list of modules that do not require a session token
-function GetModulesAnonymous() : array
-{
-    return [
-        api_module_auth,
-        api_module_package,
-        api_module_registration
-    ];
-}
+<?php if(isset($_SESSION['message'])): ?>
+    <div class="message">
+        <p>
+            <?php echo $_SESSION['message']; ?>
+        </p>
+    </div>
+<?php endif; ?>
 
-// return a list of tables that should not be used by api db module
-function GetTablesExclusionList() : array
-{
-    return [
-        'authentication',
-        'authorization_role',
-        'module',
-        'modulemethod',
-        'role',
-        'role_group_tasks',
-        'session',
-        'task'
-    ];
-}
+<hr/>
 
-// return a list of tables that should be used by api db module
-function GetTablesAllowedList() : array
-{
-    return [
-        'storage'
-    ];
-}
+<main class="container container-main">
+    <h1>BONJOUR</h1>
 
-function IsHttpVerbAllowed($verb) : bool
-{
-    return in_array(mb_strtolower($verb), http_verbs_allowed);
-}
+    <hr/>
 
-// result is re-used for each module
-$result = null;
-/*
- * the next section determines reasons to end communication
- * */
-if (isset($_SERVER['REQUEST_METHOD'])
-    && !IsHttpVerbAllowed($_SERVER['REQUEST_METHOD']))
-{
-    // the http verb is not allowed
-    die();
-}
+    <h2>Quoi de neuf?</h2>
 
-if (!isset($_REQUEST[api_cmd]))
-{
-    // missing mandatory cmd argument
-    die();
-}
+    <hr/>
 
-if (!isset($_REQUEST[api_session_token]))
-{
-    // the module is not anonymous and the session token is not set
-    if (!in_array($_REQUEST[api_cmd], GetModulesAnonymous()))
-    die();
-}
+    <h2>Versions</h2>
 
-if (!in_array($_REQUEST[api_cmd], GetModules()))
-{
-    // the module is not valid
-    die();
-}
+    <hr/>
+</main>
 
-// authentication is done here
-if (isset($_REQUEST[api_session_token]))
-{
-    $session = $engine->database->Read('session', ['token' => $_REQUEST[api_session_token]]);
-    if (is_null($session))
-    {
-        // invalid session token
-        die();
-    }
-}
+<?php require_once 'footer_public.php'; ?>
 
-// modules
-if ($_REQUEST[api_cmd] === api_module_registration)
-{
-    if (is_null($_REQUEST[api_username]))
-    {
-        // missing mandatory username argument
-        die();
-    }
-
-    $username = $_REQUEST[api_username] . engine::Random_str(8);
-    $token = engine::Random_str(256);
-    $engine->database->Create('authentication', [api_username => $username, api_token => $token]);
-    $result = [api_username => $username, api_token => $token];
-}
-
-if ($_REQUEST[api_cmd] === api_module_whoami)
-{
-    $session = $engine->database->Read('session', ['token' => $_REQUEST[api_session_token]]);
-    $user = $engine->database->Read('authentication', ['id' => $session->authenticationId]);
-    $user->token = null;
-    $result = [api_module_whoami => $user];
-}
-
-if ($_REQUEST[api_cmd] === api_module_packaging)
-{
-    //
-}
-
-if ($_REQUEST[api_cmd] === api_module_db)
-{
-    if (is_null($_REQUEST['arg'])
-    || is_null($_REQUEST['table']))
-    {
-        // missing mandatory arg argument
-        die();
-    }
-
-    if (in_array($_REQUEST['table'], GetTablesExclusionList()))
-    {
-        // the table is not allowed
-        die();
-    }
-
-    if (!in_array($_REQUEST['table'], GetTablesAllowedList()))
-    {
-        // the table is not allowed
-        die();
-    }
-
-    $argsToFilters = ['arg', 'table'];
-    $data = [];
-    foreach ($_REQUEST as $key => $value)
-    {
-        if (!in_array($key, $argsToFilters))
-        {
-            $data[$key] = $value;
-        }
-    }
-
-    if ($_REQUEST['arg'] === 'c' || $_REQUEST['arg'] === 'create')
-    {
-        $result['operationResult'] = $engine->database->Create($_REQUEST['table'], $data);
-        $result['lastInsertedId'] = $engine->database->LastInsertedId();
-    }
-
-    if ($_REQUEST['arg'] === 'r' || $_REQUEST['arg'] === 'read')
-    {
-        if (is_null($_REQUEST['id']))
-        {
-            // missing mandatory id argument
-            die();
-        }
-
-        $result['operationResult'] = $engine->database->Read($_REQUEST['table'], ['id' => $_REQUEST['id']]);
-    }
-
-    if ($_REQUEST['arg'] === 'u' || $_REQUEST['arg'] === 'update')
-    {
-        if (is_null($_REQUEST['id']))
-        {
-            // missing mandatory id argument
-            die();
-        }
-
-        $result['operationResult'] = $engine->database->Update($_REQUEST['table'], $data, ['id' => $_REQUEST['id']]);
-    }
-
-    if ($_REQUEST['arg'] === 'd' || $_REQUEST['arg'] === 'delete')
-    {
-        if (is_null($_REQUEST['id']))
-        {
-            // missing mandatory id argument
-            die();
-        }
-
-        $result['operationResult'] = $engine->database->Delete($_REQUEST['table'], ['id' => $_REQUEST['id']]);
-    }
-}
-
-if ($_REQUEST[api_cmd] === api_module_package)
-{
-    $package = $engine->database->Read('package', ['id' => $_REQUEST['id']]);
-    $result = [api_module_package => $package];
-}
-
-if ($_REQUEST[api_cmd] === api_module_auth)
-{
-    if (is_null($_REQUEST[api_token]))
-    {
-        // missing mandatory token argument
-        die();
-    }
-
-    $user = $engine->database->CustomWhereClause('authentication', api_token, $_REQUEST[api_token]);
-    if (count($user) === 0)
-    {
-        // invalid token
-        die();
-    }
-
-    // erase all sessions for this user
-    $engine->database->DeleteAllCustom('session',['authenticationId' => $user[0]->id]);
-
-    $sessionToken = engine::Random_str(256);
-    $engine->database->Create('session', ['authenticationId' => $user[0]->id, 'token' => $sessionToken]);
-    $result = [api_session_token => $sessionToken];
-}
-
-
-
-// output json
-header('Content-Type: application/json');
-echo json_encode([api_result => $result], JSON_PRETTY_PRINT);
-die();
+</body>
+</html>

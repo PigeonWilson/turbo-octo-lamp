@@ -2,22 +2,23 @@
 require_once 'loader.php';
 session_start();
 
-if (isset($_SESSION['loggedin']))
+if (isset($_SESSION[web_session_loggedIn])
+            && $_SESSION[web_session_loggedIn] === true)
 {
     header('Location: ' . admin_url);
     die();
 }
 
-if (!isset($_SESSION['csrf'])) {
-    $_SESSION['csrf'] = bin2hex(random_bytes(64));
+if (!isset($_SESSION[web_csrf])) {
+    $_SESSION[web_csrf] = bin2hex(random_bytes(64));
 }
 
 if (
         isset($_REQUEST['action'])
         && isset($_REQUEST['password'])
-        && isset($_REQUEST['csrf'])
+        && isset($_REQUEST[web_csrf])
         && $_REQUEST['action'] === 'login'
-        && $_REQUEST['csrf'] === $_SESSION['csrf'])
+        && $_REQUEST[web_csrf] === $_SESSION[web_csrf])
 {
 
 
@@ -34,10 +35,9 @@ if (
     {
         if ($data->result->session_token !== null)
         {
-
-            $_SESSION['loggedin'] = true;
+            $_SESSION[web_session_loggedIn] = true;
             $_SESSION[api_session_token] = $data->result->session_token;
-            unset($_SESSION['csrf']);
+            unset($_SESSION[web_csrf]);
             header('Location: ' . admin_url);
             die();
         }
@@ -45,7 +45,7 @@ if (
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?php echo web_lang; ?>">
 <head>
     <meta http-equiv="cache-control" content="max-age=0" />
     <meta http-equiv="cache-control" content="no-cache" />
@@ -54,29 +54,48 @@ if (
     <meta http-equiv="pragma" content="no-cache" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
-    <title>Login</title>
-    <style>
-        div {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 75vh;
-        }
-    </style>
+    <title>Connexion</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
 </head>
-<body>
+    <body>
 
-    <div>
-        <fieldset>
-            <legend>Login</legend>
-            <form action="login.php" method="post">
-                <input type="hidden" name="csrf" value="<?php echo $_SESSION['csrf'];?>">
-                <input type="hidden" name="action" value="login">
-                <input type="password" name="password" placeholder="Password">
-                <input type="submit" value="Login">
-            </form>
-        </fieldset>
+    <?php require_once 'header_public.php';?>
+
+    <?php if(isset($_SESSION['message'])): ?>
+    <div class="message">
+        <p>
+            <?php echo $_SESSION['message']; ?>
+        </p>
     </div>
+    <?php endif; ?>
 
+    <hr/>
+
+    <main>
+        <div id="form">
+            <fieldset>
+                <legend>Connexion</legend>
+                <form action="?" method="post">
+                    <input type="hidden" name="<?php echo web_csrf; ?>" value="<?php echo $_SESSION[web_csrf];?>">
+                    <input type="hidden" name="action" value="login">
+                    <input required type="password" name="password" placeholder="Mot de passe">
+                    <input type="submit" value="Soumettre">
+                </form>
+                <p>
+                    Vous n'avez pas de compte ? <a href="register.php">Inscrivez-vous</a>
+                </p>
+            </fieldset>
+        </div>
+    </main>
+
+
+
+    <?php require_once 'footer_public.php'; ?>
+
+    </body>
 </html>
