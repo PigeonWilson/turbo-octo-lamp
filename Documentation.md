@@ -2,14 +2,14 @@
 
 ### composants
 service backend php: 
-- module pour la base de données
+- [complété] module pour la base de données
 - module pour le contrôle des accès et de l'identité
 - module pour la publication de contenu 
 - module courriel
 - module communication interne
-- module debug
+- [complété] debug mode
 - module pour les tests
-- module api
+- [complété] module api
 - module sauvegarde
 - module cron job
 
