@@ -1,4 +1,9 @@
 <?php
+if (!defined('prevent_direct_access'))
+{
+    // prevent direct access to this file
+    die();
+}
 function sendHttpQuery($url, $data) : string
 {
 

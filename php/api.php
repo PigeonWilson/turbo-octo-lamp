@@ -7,7 +7,7 @@ $result = null;
  * the next section determines reasons to end communication
  * */
 if (isset($_SERVER['REQUEST_METHOD'])
-    && !IsHttpVerbAllowed($_SERVER['REQUEST_METHOD']))
+    && !Loader::IsHttpVerbAllowed($_SERVER['REQUEST_METHOD']))
 {
     // the http verb is not allowed
     die();
@@ -22,11 +22,11 @@ if (!isset($_REQUEST[api_cmd]))
 if (!isset($_REQUEST[api_session_token]))
 {
     // the module is not anonymous and the session token is not set
-    if (!in_array($_REQUEST[api_cmd], GetModulesAnonymous()))
+    if (!in_array($_REQUEST[api_cmd], Loader::GetModulesAnonymous()))
     die();
 }
 
-if (!in_array($_REQUEST[api_cmd], GetModules()))
+if (!in_array($_REQUEST[api_cmd], Loader::GetModules()))
 {
     // the module is not valid
     die();
@@ -80,13 +80,13 @@ if ($_REQUEST[api_cmd] === api_module_db)
         die();
     }
 
-    if (in_array($_REQUEST['table'], GetTablesExclusionList()))
+    if (in_array($_REQUEST['table'], Loader::GetTablesExclusionList()))
     {
         // the table is not allowed
         die();
     }
 
-    if (!in_array($_REQUEST['table'], GetTablesAllowedList()))
+    if (!in_array($_REQUEST['table'], Loader::GetTablesAllowedList()))
     {
         // the table is not allowed
         die();

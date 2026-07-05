@@ -5,7 +5,7 @@ session_start();
 if (isset($_SESSION[web_session_loggedIn])
             && $_SESSION[web_session_loggedIn] === true)
 {
-    header('Location: ' . admin_url);
+    header('Location: ' . web_admin_url);
     die();
 }
 
@@ -28,7 +28,7 @@ if (
                     api_token => $_REQUEST['password']
             ];
 
-    $response = sendHttpQuery(api_url, $data);
+    $response = sendHttpQuery(web_api_url, $data);
     $data = json_decode($response);
 
     try
@@ -38,14 +38,14 @@ if (
             $_SESSION[web_session_loggedIn] = true;
             $_SESSION[api_session_token] = $data->result->session_token;
             unset($_SESSION[web_csrf]);
-            header('Location: ' . admin_url);
+            header('Location: ' . web_admin_url);
             die();
         }
     }catch (Exception $e){die();}
 }
 ?>
 <!DOCTYPE html>
-<html lang="<?php echo web_lang; ?>">
+<html lang="<?php echo project_default_lang; ?>">
 <head>
     <meta http-equiv="cache-control" content="max-age=0" />
     <meta http-equiv="cache-control" content="no-cache" />

@@ -21,7 +21,7 @@ if (isset($_REQUEST['logout']))
 }
 ?>
 <!DOCTYPE html>
-<html lang="<?php echo web_lang; ?>">
+<html lang="<?php echo project_default_lang; ?>">
 <head>
     <meta http-equiv="cache-control" content="max-age=0" />
     <meta http-equiv="cache-control" content="no-cache" />

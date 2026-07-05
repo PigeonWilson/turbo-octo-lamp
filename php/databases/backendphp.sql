@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 02, 2026 at 06:45 PM
+-- Generation Time: Jul 05, 2026 at 08:42 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -31,15 +31,16 @@ CREATE TABLE `authentication` (
   `id` int(11) NOT NULL,
   `stamp` timestamp NOT NULL DEFAULT current_timestamp(),
   `username` text NOT NULL,
-  `token` text NOT NULL
+  `token` text NOT NULL,
+  `isActive` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `authentication`
 --
 
-INSERT INTO `authentication` (`id`, `stamp`, `username`, `token`) VALUES
-(1, '2026-06-25 17:20:52', 'test', 'test');
+INSERT INTO `authentication` (`id`, `stamp`, `username`, `token`, `isActive`) VALUES
+(1, '2026-06-25 17:20:52', 'test', 'test', 1);
 
 -- --------------------------------------------------------
 
@@ -52,6 +53,32 @@ CREATE TABLE `authorization_role` (
   `authorizationId` int(11) NOT NULL,
   `roleId` int(11) NOT NULL,
   `moduleId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cache`
+--
+
+CREATE TABLE `cache` (
+  `id` int(11) NOT NULL,
+  `key` text NOT NULL,
+  `value` text NOT NULL,
+  `isEncrypted` tinyint(1) NOT NULL DEFAULT 0,
+  `authenticationId` int(11) NOT NULL COMMENT 'this set the author of this cache item'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `localization`
+--
+
+CREATE TABLE `localization` (
+  `id` int(11) NOT NULL,
+  `name` text NOT NULL,
+  `value` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -136,7 +163,7 @@ CREATE TABLE `session` (
 --
 
 INSERT INTO `session` (`id`, `authenticationId`, `token`) VALUES
-(35, 1, 'R7O6n57eGdNwKsddIeAlcS6Bn3S54FYeMGTG12cZ79y7ZQTHOk63HnLe7iluDLTxMNS0d2oGHvK4D1cbi2DbQDEhuNf5VghSj7nDttJROn0pw0SAWMlIVmvTp4IOfQAe6H7R056UvNcDYbpx093D1EGrLo1AYof4HbKEpqRO5IOFHfPcfYB8FVPkJGjwJleYZR2IbJrjy0F0olBFaRZJupsxCLTeo9b2Pq9ZwVtK53D7PVkhc2de2uNDZPeN66TZ');
+(72, 1, 'nkmn34C38pteR5r0U3x069aQrJ76MZMG0ngg55flWQzOmyX7fT7POSi6w5wNp6rirum9tpqoLeUTIfWwUfUXVEpzFOSwJtbo3hs8LTQEMwX7vbDQdvbNoVUNrqKgdeUGRVFgd2DXjBlLJoZbu7DyOKr3eNlWcpmYGvgLGwO0mhW6pBgJvDs8yxVVSpZaHHNyzFTq11ECmGWycmkDbUmwpK3u70juZvhPlHqWd7PjXYjXYYek3wu0gHM7h0HZk5rR');
 
 -- --------------------------------------------------------
 
@@ -203,6 +230,18 @@ ALTER TABLE `authentication`
 -- Indexes for table `authorization_role`
 --
 ALTER TABLE `authorization_role`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cache`
+--
+ALTER TABLE `cache`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `localization`
+--
+ALTER TABLE `localization`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -276,6 +315,18 @@ ALTER TABLE `authorization_role`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `cache`
+--
+ALTER TABLE `cache`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `localization`
+--
+ALTER TABLE `localization`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `module`
 --
 ALTER TABLE `module`
@@ -309,7 +360,7 @@ ALTER TABLE `role_group_tasks`
 -- AUTO_INCREMENT for table `session`
 --
 ALTER TABLE `session`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `storage`
