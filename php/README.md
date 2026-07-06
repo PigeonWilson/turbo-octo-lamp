@@ -1,4 +1,10 @@
 # Documentation
+## public links
+/api.php
+/login.php
+/index.php
+/register.php
+
 ## Configuration
 /config/config.system.php
 - system database connection information
