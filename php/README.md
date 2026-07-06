@@ -1,4 +1,15 @@
 # Documentation
+## API (/api.php)
+### Anonymous access modules list
+- auth: user authentication
+- package: retrieve information from the database
+- registration: user registration
+
+### Require authentication and authorization modules list
+- db: crud operations on the project database
+- whoami: provide informations about a user
+- packaging: package existing information from the database at the attention of anonymous usage
+
 ## public links
 - /api.php
 - /login.php
