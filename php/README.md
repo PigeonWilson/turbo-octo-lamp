@@ -1,9 +1,9 @@
 # Documentation
 ## public links
-/api.php
-/login.php
-/index.php
-/register.php
+- /api.php
+- /login.php
+- /index.php
+- /register.php
 
 ## Configuration
 /config/config.system.php
