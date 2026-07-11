@@ -32,13 +32,8 @@ class Loader
     {
         return [
             'authentication',
-            'authorization_role',
-            'module',
-            'modulemethod',
-            'role',
-            'role_group_tasks',
+            'cache',
             'session',
-            'task',
             'localization'
         ];
     }

@@ -68,7 +68,7 @@ if (isset($_REQUEST['logout']))
             </tr>
 
         <?php
-        $users = $engine->database->ReadAll('authentication');
+        $users = $project_engine->database->ReadAll('authentication');
         foreach ($users as $user) {
         ?>
                 <tr>

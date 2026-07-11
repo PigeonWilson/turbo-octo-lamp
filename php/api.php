@@ -35,7 +35,7 @@ if (!in_array($_REQUEST[api_cmd], Loader::GetModules()))
 // authentication is done here
 if (isset($_REQUEST[api_session_token]))
 {
-    $session = $engine->database->Read('session', ['token' => $_REQUEST[api_session_token]]);
+    $session = $project_engine->database->Read('session', ['token' => $_REQUEST[api_session_token]]);
     if (is_null($session))
     {
         // invalid session token
@@ -54,14 +54,14 @@ if ($_REQUEST[api_cmd] === api_module_registration)
 
     $username = $_REQUEST[api_username] . engine::Random_str(8);
     $token = engine::Random_str(256);
-    $engine->database->Create('authentication', [api_username => $username, api_token => $token]);
+    $project_engine->database->Create('authentication', [api_username => $username, api_token => $token]);
     $result = [api_username => $username, api_token => $token];
 }
 
 if ($_REQUEST[api_cmd] === api_module_whoami)
 {
-    $session = $engine->database->Read('session', ['token' => $_REQUEST[api_session_token]]);
-    $user = $engine->database->Read('authentication', ['id' => $session->authenticationId]);
+    $session = $project_engine->database->Read('session', ['token' => $_REQUEST[api_session_token]]);
+    $user = $project_engine->database->Read('authentication', ['id' => $session->authenticationId]);
     $user->token = null;
     $result = [api_module_whoami => $user];
 }
@@ -104,8 +104,8 @@ if ($_REQUEST[api_cmd] === api_module_db)
 
     if ($_REQUEST['arg'] === 'c' || $_REQUEST['arg'] === 'create')
     {
-        $result['operationResult'] = $engine->database->Create($_REQUEST['table'], $data);
-        $result['lastInsertedId'] = $engine->database->LastInsertedId();
+        $result['operationResult'] = $project_engine->database->Create($_REQUEST['table'], $data);
+        $result['lastInsertedId'] = $project_engine->database->LastInsertedId();
     }
 
     if ($_REQUEST['arg'] === 'r' || $_REQUEST['arg'] === 'read')
@@ -116,7 +116,7 @@ if ($_REQUEST[api_cmd] === api_module_db)
             die();
         }
 
-        $result['operationResult'] = $engine->database->Read($_REQUEST['table'], ['id' => $_REQUEST['id']]);
+        $result['operationResult'] = $project_engine->database->Read($_REQUEST['table'], ['id' => $_REQUEST['id']]);
     }
 
     if ($_REQUEST['arg'] === 'u' || $_REQUEST['arg'] === 'update')
@@ -127,7 +127,7 @@ if ($_REQUEST[api_cmd] === api_module_db)
             die();
         }
 
-        $result['operationResult'] = $engine->database->Update($_REQUEST['table'], $data, ['id' => $_REQUEST['id']]);
+        $result['operationResult'] = $project_engine->database->Update($_REQUEST['table'], $data, ['id' => $_REQUEST['id']]);
     }
 
     if ($_REQUEST['arg'] === 'd' || $_REQUEST['arg'] === 'delete')
@@ -138,13 +138,13 @@ if ($_REQUEST[api_cmd] === api_module_db)
             die();
         }
 
-        $result['operationResult'] = $engine->database->Delete($_REQUEST['table'], ['id' => $_REQUEST['id']]);
+        $result['operationResult'] = $project_engine->database->Delete($_REQUEST['table'], ['id' => $_REQUEST['id']]);
     }
 }
 
 if ($_REQUEST[api_cmd] === api_module_package)
 {
-    $package = $engine->database->Read('package', ['id' => $_REQUEST['id']]);
+    $package = $project_engine->database->Read('package', ['id' => $_REQUEST['id']]);
     $result = [api_module_package => $package];
 }
 
@@ -156,7 +156,7 @@ if ($_REQUEST[api_cmd] === api_module_auth)
         die();
     }
 
-    $user = $engine->database->CustomWhereClause('authentication', api_token, $_REQUEST[api_token]);
+    $user = $project_engine->database->CustomWhereClause('authentication', api_token, $_REQUEST[api_token]);
     if (count($user) === 0)
     {
         // invalid token
@@ -164,10 +164,10 @@ if ($_REQUEST[api_cmd] === api_module_auth)
     }
 
     // erase all sessions for this user
-    $engine->database->DeleteAllCustom('session',['authenticationId' => $user[0]->id]);
+    $project_engine->database->DeleteAllCustom('session',['authenticationId' => $user[0]->id]);
 
     $sessionToken = engine::Random_str(256);
-    $engine->database->Create('session', ['authenticationId' => $user[0]->id, 'token' => $sessionToken]);
+    $project_engine->database->Create('session', ['authenticationId' => $user[0]->id, 'token' => $sessionToken]);
     $result = [api_session_token => $sessionToken];
 }
 

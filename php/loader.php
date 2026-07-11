@@ -23,6 +23,6 @@ require_once 'core' . DIRECTORY_SEPARATOR . 'Caching.php';
 try{
     # required configuration loaded from config.project.php
     # boot load the framework
-    $engine = new Engine($project_db_host, $project_db_name, $project_db_username, $project_db_password);
+    $project_engine = new Engine($project_db_host, $project_db_name, $project_db_username, $project_db_password);
     engine::SanitizeInput();
 }catch (Exception $e){die();}

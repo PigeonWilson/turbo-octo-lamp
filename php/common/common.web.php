@@ -38,3 +38,4 @@ const web_admin_url = web_base_url . 'php' . '/admin.php';
 const web_login_url = web_base_url . 'php' . '/login.php';
 const web_index_url = web_base_url . 'php' . '/index.php';
 const web_register_url = web_base_url . 'php' . '/register.php';
+const web_status_url = web_base_url . 'php' . '/status.php';

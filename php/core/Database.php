@@ -14,6 +14,22 @@ class Database
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
+    public function TestConnection() : bool
+    {
+        try {
+            $query = $this->pdo->query("SHOW TABLES");
+            $test = $query->fetchAll();
+            if (count($test) > 0)
+            {
+                return true;
+            }
+        } catch (PDOException $e) {
+            return false;
+        }
+
+        return false;
+    }
+
     public function LastInsertedId()
     {
         return $this->pdo->lastInsertId();
