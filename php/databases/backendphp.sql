@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 05, 2026 at 08:42 PM
+-- Generation Time: Jul 14, 2026 at 10:33 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -45,19 +45,6 @@ INSERT INTO `authentication` (`id`, `stamp`, `username`, `token`, `isActive`) VA
 -- --------------------------------------------------------
 
 --
--- Table structure for table `authorization_role`
---
-
-CREATE TABLE `authorization_role` (
-  `id` int(11) NOT NULL,
-  `authorizationId` int(11) NOT NULL,
-  `roleId` int(11) NOT NULL,
-  `moduleId` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `cache`
 --
 
@@ -84,32 +71,6 @@ CREATE TABLE `localization` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `module`
---
-
-CREATE TABLE `module` (
-  `id` int(11) NOT NULL,
-  `name` text NOT NULL,
-  `description` text NOT NULL,
-  `referenceName` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `modulemethod`
---
-
-CREATE TABLE `modulemethod` (
-  `id` int(11) NOT NULL,
-  `moduleId` int(11) NOT NULL,
-  `referenceName` text NOT NULL,
-  `description` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `package`
 --
 
@@ -119,31 +80,6 @@ CREATE TABLE `package` (
   `data2` longblob DEFAULT NULL,
   `description` text NOT NULL,
   `isActive` tinyint(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `role`
---
-
-CREATE TABLE `role` (
-  `id` int(11) NOT NULL,
-  `name` text NOT NULL,
-  `description` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `role_group_tasks`
---
-
-CREATE TABLE `role_group_tasks` (
-  `id` int(11) NOT NULL,
-  `moduleMethodId` int(11) NOT NULL,
-  `roleId` int(11) NOT NULL,
-  `taskId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -163,7 +99,7 @@ CREATE TABLE `session` (
 --
 
 INSERT INTO `session` (`id`, `authenticationId`, `token`) VALUES
-(72, 1, 'nkmn34C38pteR5r0U3x069aQrJ76MZMG0ngg55flWQzOmyX7fT7POSi6w5wNp6rirum9tpqoLeUTIfWwUfUXVEpzFOSwJtbo3hs8LTQEMwX7vbDQdvbNoVUNrqKgdeUGRVFgd2DXjBlLJoZbu7DyOKr3eNlWcpmYGvgLGwO0mhW6pBgJvDs8yxVVSpZaHHNyzFTq11ECmGWycmkDbUmwpK3u70juZvhPlHqWd7PjXYjXYYek3wu0gHM7h0HZk5rR');
+(73, 1, 'nwrnUwvNPoIaw3IaYoP5tHh3Kji3MofKMr4JL7pyctR23XY679h8INVh2p9Ro5AHUFNPSgntWZDxvN2wrixFP0SP9gRa9kvEIHBeM8iNzRdvk6IjsGLNpH5zkBHoNnKWjjwNmITFfO1qJRFQZ1anSDJEmJUgkEv2o0JraZrE6wSfnuaXZSxu955Gw1Nji7Q0Ago4NJ4oAUchZQiROPwWyIeNO1qEZykmhF4NeE9N6RdUUGZjmsG9cHpAyZ01YPqZ');
 
 -- --------------------------------------------------------
 
@@ -178,44 +114,6 @@ CREATE TABLE `storage` (
   `data2` longblob DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `system_table`
---
-
-CREATE TABLE `system_table` (
-  `id` int(11) NOT NULL,
-  `name` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `system_table`
---
-
-INSERT INTO `system_table` (`id`, `name`) VALUES
-(1, 'authentication'),
-(2, 'authorization_role'),
-(3, 'module'),
-(4, 'modulemethod'),
-(5, 'package'),
-(6, 'role'),
-(7, 'role_group_tasks'),
-(8, 'session'),
-(9, 'task');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `task`
---
-
-CREATE TABLE `task` (
-  `id` int(11) NOT NULL,
-  `name` text NOT NULL,
-  `description` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 --
 -- Indexes for dumped tables
 --
@@ -224,12 +122,6 @@ CREATE TABLE `task` (
 -- Indexes for table `authentication`
 --
 ALTER TABLE `authentication`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `authorization_role`
---
-ALTER TABLE `authorization_role`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -245,33 +137,9 @@ ALTER TABLE `localization`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `module`
---
-ALTER TABLE `module`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `modulemethod`
---
-ALTER TABLE `modulemethod`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `package`
 --
 ALTER TABLE `package`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `role`
---
-ALTER TABLE `role`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `role_group_tasks`
---
-ALTER TABLE `role_group_tasks`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -287,18 +155,6 @@ ALTER TABLE `storage`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `system_table`
---
-ALTER TABLE `system_table`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `task`
---
-ALTER TABLE `task`
-  ADD PRIMARY KEY (`id`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -307,12 +163,6 @@ ALTER TABLE `task`
 --
 ALTER TABLE `authentication`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `authorization_role`
---
-ALTER TABLE `authorization_role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `cache`
@@ -327,58 +177,22 @@ ALTER TABLE `localization`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `module`
---
-ALTER TABLE `module`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `modulemethod`
---
-ALTER TABLE `modulemethod`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
 -- AUTO_INCREMENT for table `package`
 --
 ALTER TABLE `package`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `role`
---
-ALTER TABLE `role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `role_group_tasks`
---
-ALTER TABLE `role_group_tasks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `session`
 --
 ALTER TABLE `session`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
 -- AUTO_INCREMENT for table `storage`
 --
 ALTER TABLE `storage`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
-
---
--- AUTO_INCREMENT for table `system_table`
---
-ALTER TABLE `system_table`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- AUTO_INCREMENT for table `task`
---
-ALTER TABLE `task`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

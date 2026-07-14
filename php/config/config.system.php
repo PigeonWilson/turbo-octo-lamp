@@ -11,5 +11,5 @@ $system_db_name = "backendphp_system";
 $system_db_username = "root";
 $system_db_password = "";
 
-# set debug mode
-const system_debug_mode = true;
+# force system to generate file(s)
+const system_force_generate_files = true;
