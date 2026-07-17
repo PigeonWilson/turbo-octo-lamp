@@ -2,7 +2,7 @@
 Le but de cette page est d'expliquer le fonctionnement et les critères d'inclusion ou de refus des contributions à ce site Internet. Vous pouvez consulter le manifeste pour connaître nos valeurs et notre philosophie.
 
 ## 1- Objectif du présent site Internet
-L’objectif du site est de créer des liens et de faire connaître le plus facilement possible différentes organisations organisées autour de lieux physiques qui ont une mission explicitement d’offre d’alternative au capitalisme ou qui représentent implicitement une telle alternative située dans la grande région de Montréal. Le but recherché est de donner de la visibilité à ces lieux, mais aussi et surtout de permettre aux personnes qui souhaitent consommer différemment en sortant leur argent des modes de production et de consommation capitaliste de le faire.  
+L’objectif du site est de créer des liens et de faire connaître le plus facilement possible différentes organisations organisées autour de lieux physiques qui ont une mission explicitement d’offre d’alternative au capitalisme ou qui représentent implicitement une telle alternative située dans la grande région de Montréal. Le but recherché est de donner de la visibilité à ces lieux, mais aussi et surtout de permettre aux personnes qui souhaitent consommer différemment en sortant leur argent (et leur temps) des modes de production et de consommation capitaliste de le faire.  
 
 ## 2- Définitions 
 **Lieu** : Se définit comme "lieu" pour ce site Internet un endroit physique qui offre des services, des produits, des lieux de réunion ou met diverses ressources en commun. Une organisation qui n'aurait comme base qu'un site Internet ne se qualifie pas pour avoir une fiche sur le présent site.
