@@ -1,42 +1,34 @@
-# Règlements
-Le but de cette page est d'expliquer le fonctionnement et les critères d'inclusion ou de refus des contributions à ce site Internet. Vous pouvez consulter le manifeste pour connaître nos valeurs et notre philosophie.
+# Rules
+The purpose of this page is to explain how this website works and the criteria for inclusion or rejection of contributions. You can consult the manifesto to learn about our values ​​and philosophy.
 
-## 1- Objectif du présent site Internet
-L’objectif du site est de créer des liens et de faire connaître le plus facilement possible différentes organisations organisées autour de lieux physiques qui ont une mission explicitement d’offre d’alternative au capitalisme ou qui représentent implicitement une telle alternative située dans la grande région de Montréal. Le but recherché est de donner de la visibilité à ces lieux, mais aussi et surtout de permettre aux personnes qui souhaitent consommer différemment en sortant leur argent des modes de production et de consommation capitaliste de le faire.  
+## 1- Purpose of this Website
+The purpose of this website is to create connections and raise awareness as easily as possible of various organizations centered around physical locations that explicitly offer alternatives to capitalism or implicitly represent such an alternative in the greater Montreal area. The goal is to give visibility to these locations, but also, and above all, to enable people who wish to consume differently by diverting their money away from capitalist modes of production and consumption to do so.
 
-## 2- Définitions 
-**Lieu** : Se définit comme "lieu" pour ce site Internet un endroit physique qui offre des services, des produits, des lieux de réunion ou met diverses ressources en commun. Une organisation qui n'aurait comme base qu'un site Internet ne se qualifie pas pour avoir une fiche sur le présent site.
+## 2- Definitions
+Location: For this website, a "location" is defined as a physical place that offers services, products, meeting spaces, or pools various resources. An organization whose sole basis is a website is not eligible for a listing on this site.
 
-**Anticapitalisme** : Se définit comme “anticapitalisme” ou “anticapitaliste” pour ce site web un ensemble de courants de pensée qui s’oppose au minimum au présent système de possession des moyens de production par des acteurs privés et le profit empoché par ces mêmes acteurs ainsi qu’une opposition à la croissance économique au moins comme déterminant des choix sociaux d’une société. Des écoles de pensée comme le marxisme, différentes formes d’anarchisme (à l’exception de l’anarcho-capitalisme) ou de socialisme entre dans notre définition d’anticapitalisme.
+Anticapitalism: For this website, “anticapitalism” or “anticapitalist” refers to a set of schools of thought that oppose, at a minimum, the current system of private ownership of the means of production and the profits reaped by these same actors, as well as an opposition to economic growth as a determining factor in a society's social choices. Schools of thought such as Marxism, various forms of anarchism (with the exception of anarcho-capitalism), and socialism fall within our definition of anticapitalism.
 
-**Grande région de Montréal** : se définit comme grande région de Montréal une aire géographique comprenant toutes les municipalités incluses dans les agglomérations de Montréal et de Longueuil, ainsi que les MRC suivantes : Deux-Montagnes, L’Assomption, Les Moulins, Thérèse-de-Blainville, Marguerite-D’Youville, Roussillon, Rouville, Vaudreuil-Soulanges, La-Vallée-du-Richelieu, Beauharnois-Salaberry, Mirabel, Laval, Laurentides et Montcalm.
+Greater Montreal Area: The Greater Montreal Area is defined as a geographic area encompassing all municipalities within the Montreal and Longueuil agglomerations, as well as the following regional county municipalities (MRCs): Deux-Montagnes, L’Assomption, Les Moulins, Thérèse-de-Blainville, Marguerite-D’Youville, Roussillon, Rouville, Vaudreuil-Soulanges, La Vallée-du-Richelieu, Beauharnois-Salaberry, Mirabel, Laval, Laurentides, and Montcalm.
 
-## 3- Règlements
-Est interdit de publier : 
-    • Des lieux qui n’ont pas encore été ouverts au public ou qui sont encore à l’état de projet; 
-    • Des lieux qui, même s’ils semblent respecter la définition de PME responsable telle qu’explicitée précédemment, font partie d’une franchise de plusieurs lieux détenus par une même entreprise;
-    • Des lieux dont l’organisation administrative derrière son exploitation ont émis verbalement, par écrit ou dans les médias (sociaux ou traditionnels) des propos qui peuvent être considérés comme anti-LGBTQ+, racistes ou xénophobes, capacitistes ou classistes ou qui correspondent à toute forme de haine envers un groupe minoritaire quelconque. [Nom_du_site] est et sera toujours un espace ouvert à toutes les différences et totalement réfractaire aux semeurs de haine. L’administration de ce site se réserve le droit de supprimer de sa base de données tout lieu qui ne respecte pas la présente règle et ce sans avertissement préalable;
-    • Des lieux situés dans des résidences privées. Les lieux doivent être situés dans des locaux spécifiquement dédiés à la fin derrière l’organisation qui le gère, cela dans le but de faciliter la vérification de la nature de l’activité effectuée dans le lieu et pour des raisons de sécurité;
-    • Des photos ou tout matériel visuel qui sont sujets à des droits d’auteur. Veuillez utiliser du matériel libre de droit ou que vous avez produit vous-mêmes;
-    • Des lieux situés hors de la grande région de Montréal telle que définie à la section “Définitions”
-    • Des lieux qui ne correspondent pas aux critères définis dans les trois catégories de lieux tel que explicités dans la section ci-dessous; 
+## 3- Regulations
+It is prohibited to publish: 
+• Information about places that have not yet been opened to the public or that are still in the planning stages; 
+Information about places whose administrative organization has made statements, verbally, in writing, or in the media (social or traditional), that can be considered anti-LGBTQ+, racist or xenophobic, ableist or classist, or that constitute any form of hatred toward any minority group. [Site_Name] is and always will be a space open to all differences and completely resistant to hate-mongers. The site administration reserves the right to remove from its database any location that does not comply with this rule without prior notice; 
+• Locations located in private residences. Locations must be located in premises specifically dedicated to the purpose of the organization managing them, in order to facilitate verification of the nature of the activity carried out there and for security reasons; 
+• Photos or any visual material that is subject to copyright. Please use royalty-free material or material that you have produced yourself; 
+• Locations located outside the Greater Montreal area as defined in the “Definitions” section; 
+• Locations that do not meet the criteria defined in the two categories of locations as explained in the section below;
 
-## 4- Les deux catégories de lieux qui peuvent être inclus
+## 4- The two categories of places that can be included
+### 4.1 - Explicitly anti-capitalist places
+All places offering products or services that define themselves in their mission and/or objectives as anti-capitalist, self-managed, and/or attempting to offer an alternative to capitalist modes of organization. They are accepted with a link to a web resource that explains their mission. Places falling into this category are represented by a green circle.
 
-### 4.1 - Les lieux explicitement anticapitalistes
+### 4.2 - Social economy places, organized around a cooperative or other alternative modes of organization
+These places do not explicitly define themselves as anti-capitalist, but are organized around a formal or informal legal structure that is neither a private nor a public enterprise. This category may include (but is not limited to): a non-profit social enterprise, a community service organization, a time-exchange service between individuals, a municipal or national park, a thrift store or any other non-profit business, a housing cooperative, a non-profit group purchasing organization, etc.
 
-Tous les lieux offrant des produits ou des services se définissant dans leur mission et/ou leurs objectifs comme étant anticapitaliste, auto-géré et/ou tentant d'offrir une alternative à des modes d'organisation capitaliste. Ils sont acceptés accompagné d'un lien vers une ressource web qui explique leur mission.
-Les lieux entrant dans cette catégorie sont représentés par un rond de couleur verte. 
+## 5. Licenses and Copyright
+The source code for [Site_Name] is available under the AGPL version 3 license and can be downloaded and viewed at the following address: https://github.com/PigeonWilson/turbo-octo-lamp. All written and visual content available on this site is usable under the terms of the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0). This license allows you to distribute, adapt, modify, or reuse any material on this site for non-commercial purposes only. In such cases, you must attribute the content you wish to use to this site and you are also required to adopt the same license (CC BY-NC-SA 4.0) for any content from this site that you wish to reuse.
 
-### 4.2 - Les lieux d'économie sociale, organisé autour d'une coopérative ou d'autres modes d'organisation alternatifs
-
-Ces lieux ne se définissent pas explicitement comme anticapitalistes, mais sont organisés autour d'une structure légale formelle ou informelle qui n'est pas une entreprise privée ou publique. Peuvent être inclus dans cette catégorie (cette liste n'est pas exhaustive) : une entreprise d'insertion à but non-lucrative, un organisme communautaire offrant des services, un service d'échange de temps entre individus, un parc municipal ou national, une friperie ou tout autre commerce sans but lucratif, une coopérative d'habitation, un groupement d'achats en commun sans but lucratif, une organisation militante possédant un local, etc. Le critère le plus important dans cette catégorie est la non-pécuniarité des activités de l'organisation derrière le lieu. 
-Les lieux physiques représentés dans cette catégorie sont identifiés par un rond de couleur bleue. 
-
-## 5. Licences et droits d’auteur 
-Le code source de [Nom_du_site] est disponible sous la licence AGPL version 3 et peut être téléchargé et consulté à l’adresse suivante :
-https://github.com/PigeonWilson/turbo-octo-lamp
-Tout le contenu écrit ou visuel disponible sur ce site est utilisable selon les termes de la licence Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0). Cette licence permet de distribuer, adapter, modifier ou réutiliser tout le matériel présent sur ce site pour un usage uniquement non-commercial. Vous devez dans ces cas attribuer au présent site l’origine des contenus que vous souhaitez utiliser et vous êtes également dans l’obligation d’adopter la même licence (CC BY-NC-SA 4.0) pour le contenu provenant de ce site que vous voulez réutiliser.
-
-## Addenda temporaire 
-Pour les premiers mois d’exploitation du présent site web, l’ajout direct de fiches par les utilisateurs sera désactivé pour en faciliter la modération pour la petite équipe qui s’occupe de cette tâche. Nous allons éventuellement déverrouiller la fonction permettant d’éditer les fiches directement par les utilisateurs. En attendant, un formulaire est disponible pour proposer l’ajout et la modification de fiches de lieux.
+## Temporary Addendum
+For the first few months of operation of this website, users will be unable to directly add listings to facilitate moderation for the small team responsible for this task. We will eventually unlock the function allowing users to edit listings directly. In the meantime, a form is available for submitting and modifying listings for places.
